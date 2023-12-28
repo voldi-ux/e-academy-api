@@ -1,4 +1,4 @@
-# e-academy-mobile
+# e-academy-api
 
 This is the API/backend version of the app that goes with e-academy ===> the admin board.
 Project link [https://github.com/voldi-ux/e-academy](https://github.com/voldi-ux/e-academy)
