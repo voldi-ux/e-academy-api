@@ -3,41 +3,57 @@ package com.eAcademy.academyApi.question;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+
 import com.eAcademy.academyApi.users.User;
 
+import jakarta.annotation.Nonnull;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Question {
 	@Id
 	@GeneratedValue
 	private long id;
-    private long adminId;
-    private String subject;
-    private int grade;
-    private String topic;
-    private int level;
-    private Date createdDate;
-    private String description;
-    private boolean hasImage;
-    @OneToMany
-    private List<ImageLink> imageLinks;
-    @OneToMany
-    private List<Option> options;
-    @OneToOne
-    private User approver;
-    private int rightAnswerIndex;
-    private String explainnation;
-   
+	private long adminId;
+	@Size(min = 2, message = "subject length must be more than two characters")
+	private String subject;
+	@Positive
+	private int grade;
+	private String topic;
+	@Positive
+	private int level;
+	@CreationTimestamp
+	private Date createdDate;
+	@Size(min = 20, message = "description length must be more than 19 characters")
+	private String description;
+	private boolean hasImage;
+	private boolean isApproved;
+	@OneToMany(cascade = CascadeType.ALL)
+	@Nonnull
+	private List<ImageLink> imageLinks;
+	@Nonnull
+	private List<String> options;
+	@OneToOne
+	private User approver;
+	@Positive
+	private int rightAnswerIndex;
+	@Size(min = 20, message = "explainnation length must be more than 19 characters")
+	private String explainnation;
+
 	public Question() {
 	}
 
 	public Question(long id, long adminId, String subject, int grade, String topic, int level, Date createdDate,
-			String description, boolean hasImage, List<ImageLink> imageLinks, List<Option> options, User approver,
+			String description, boolean hasImage, List<ImageLink> imageLinks, List<String> options, User approver,
 			int rightAnswerIndex, String explainnation) {
 		super();
 		this.id = id;
@@ -136,11 +152,11 @@ public class Question {
 		this.imageLinks = imageLinks;
 	}
 
-	public List<Option> getOptions() {
+	public List<String> getOptions() {
 		return options;
 	}
 
-	public void setOptions(List<Option> options) {
+	public void setOptions(List<String> options) {
 		this.options = options;
 	}
 
@@ -167,5 +183,5 @@ public class Question {
 	public void setExplainnation(String explainnation) {
 		this.explainnation = explainnation;
 	}
-	
+
 }

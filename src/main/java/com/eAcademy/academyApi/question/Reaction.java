@@ -11,7 +11,8 @@ public class Reaction {
 	private long id;
 	private long likeCount;
 	private long dislikeCount;
-
+    
+	public Reaction() {}
 	public Reaction(long id, long likeCount, long dislikeCount) {
 		super();
 		this.id = id;

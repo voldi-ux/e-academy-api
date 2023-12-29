@@ -11,6 +11,7 @@ public class Option {
 	private long id;
 	private String option;
 
+	public Option() {} 
 	public Option(long id, String option) {
 		super();
 		this.id = id;

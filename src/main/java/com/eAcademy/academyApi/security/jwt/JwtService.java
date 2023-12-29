@@ -10,6 +10,8 @@ import javax.crypto.SecretKey;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.eAcademy.academyApi.users.User;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -46,7 +48,7 @@ public class JwtService {
 		return Jwts.builder().claims(new HashMap<>()).
 				subject(user.getUsername()).
 				issuedAt(new Date(System.currentTimeMillis())).
-				expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24 )). // expires in 24 hours
+				expiration(new Date(System.currentTimeMillis() + 1000 *60 * 60 * 24 )). // expires in 24 hours
 				signWith(getKey()).
 				compact();
 	}
@@ -67,11 +69,11 @@ public class JwtService {
 	}
      
      
-     public boolean isTokenValid(String token, UserDetails user) {
+     public boolean isTokenValid(String token, User user) {
     	 String username = user.getUsername();
     	 Date expirationDate = extractClaim(token, Claims::getExpiration);
     	 
-    	 return expirationDate.before(new Date()) && username.equals(extractUsername(token)); // 
+    	 return  (new Date()).before(expirationDate) && username.equals(extractUsername(token)); // 
     	 // we are want to make sure that the token has not expired and that it belongs to the user who is trying 
     	 // to access our resources
      }

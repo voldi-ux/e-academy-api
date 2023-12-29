@@ -1,8 +1,12 @@
 package com.eAcademy.academyApi.question;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -18,12 +22,13 @@ public class StudentQuestion {
 	private String topic;
 	private String subject;
 	private int grade;
+	@CreationTimestamp
 	private Date createdDate;
 	private boolean questionHasImage;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<ImageLink> imageLinks;
 	private boolean questionAnswered;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Answer> answers;
 
 	public StudentQuestion() {}

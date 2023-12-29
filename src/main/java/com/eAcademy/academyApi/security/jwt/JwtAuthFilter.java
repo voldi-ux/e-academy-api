@@ -49,15 +49,16 @@ public class JwtAuthFilter  extends OncePerRequestFilter{
           	username = jwtService.extractUsername(jwtToken);
           	SecurityContext context = SecurityContextHolder.getContext();
           	
-			if (username != null && context.getAuthentication() != null) {
+			if (username != null && context.getAuthentication() == null) {
           		User user = (User) userDetailsSerice.loadUserByUsername(username);
           		if(jwtService.isTokenValid(jwtToken, user)) {
           			UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, null, user.getAuthorities() );
           			authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request)); // we are setting extra details 
           			// which we may want to use later. We can specify any object we want in the setDetails method call
-                      
+                  
           			context.setAuthentication(authToken); // we are now setting the user in the security context
           			
+          	
           		}          		
           		
           	}
