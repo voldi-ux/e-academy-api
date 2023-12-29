@@ -10,7 +10,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -18,13 +23,13 @@ import jakarta.persistence.Table;
 @Table(name = "_users")
 public class User implements UserDetails {
 	@Id
+	@GeneratedValue
 	private long id;
 	private String username;
 	private String email;
 	private String password;
-	
+	@Enumerated(EnumType.STRING)
 	private List<Role> roles;
-
 	@CreationTimestamp
 	private Date createdDate;
 	@UpdateTimestamp
@@ -41,6 +46,7 @@ public class User implements UserDetails {
 		this.email = email;
 		this.password = password;
 		this.roles = roles;
+	
 		this.createdDate = createdDate;
 		this.updatedDate = updatedDate;
 	}
@@ -74,7 +80,6 @@ public class User implements UserDetails {
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
@@ -99,4 +104,44 @@ public class User implements UserDetails {
 		this.updatedDate = updatedDate;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + ", roles="
+				+ roles + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
+	}
+
+	
+	
 }

@@ -4,12 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
 public class Answer {
 	@Id
+	@GeneratedValue
 	private long id;
 	private long adminId;
 	private Date createdDate;
@@ -18,7 +20,7 @@ public class Answer {
 	private String description;
 	private boolean hasImage;
 	@OneToMany
-	private List<ImageLink> links;
+	private List<ImageLink> imageLinks;
 
 	public Answer() {
 	}
@@ -32,7 +34,7 @@ public class Answer {
 		this.reactions = reactions;
 		this.description = description;
 		this.hasImage = hasImage;
-		this.links = links;
+		this.imageLinks = links;
 	}
 
 	public long getId() {
@@ -83,11 +85,11 @@ public class Answer {
 		this.hasImage = hasImage;
 	}
 
-	public List<ImageLink> getLinks() {
-		return links;
+	public List<ImageLink> getImageLinks() {
+		return imageLinks;
 	}
 
-	public void setLinks(List<ImageLink> links) {
-		this.links = links;
+	public void setImageLinks(List<ImageLink> links) {
+		this.imageLinks = links;
 	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import com.eAcademy.academyApi.users.User;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -13,6 +14,7 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class Question {
 	@Id
+	@GeneratedValue
 	private long id;
     private long adminId;
     private String subject;

@@ -10,6 +10,7 @@ import com.eAcademy.academyApi.users.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -18,6 +19,7 @@ import jakarta.persistence.OneToOne;
 public class StudentDetails {
 
 	@Id
+	@GeneratedValue
 	private long id;
 	private String firstname;
 	private String lastname;
@@ -107,11 +109,11 @@ public class StudentDetails {
 	}
 	
 	
-	public  User getStuddentId() {
+	public  User getStudentId() {
 		return studentId;
 	}
 
-	public void setStuddentId(User userId) {
+	public void setStudentId(User userId) {
 		this.studentId = userId;
 	}
     

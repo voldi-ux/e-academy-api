@@ -1,11 +1,13 @@
 package com.eAcademy.academyApi.question;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
 public class ImageLink {
 	@Id
+	@GeneratedValue
 	private long id;
 	private String link;
 
