@@ -10,6 +10,7 @@ import com.eAcademy.academyApi.users.User;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -34,27 +35,29 @@ public class Question {
 	@CreationTimestamp
 	private Date createdDate;
 	@Size(min = 20, message = "description length must be more than 19 characters")
+	@Column(columnDefinition="LONGTEXT")
 	private String description;
-	private boolean hasImage;
+//	private boolean hasImage;
 	private boolean isApproved;
-	@OneToMany(cascade = CascadeType.ALL)
-	@Nonnull
-	private List<ImageLink> imageLinks;
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@Nonnull
+//	private List<ImageLink> imageLinks;
 	@Nonnull
 	private List<String> options;
 	@OneToOne
 	private User approver;
 	@Positive
 	private int rightAnswerIndex;
+	@Column(columnDefinition="LONGTEXT")
 	@Size(min = 20, message = "explainnation length must be more than 19 characters")
-	private String explainnation;
+	private String explanation;
 
 	public Question() {
 	}
 
 	public Question(long id, long adminId, String subject, int grade, String topic, int level, Date createdDate,
-			String description, boolean hasImage, List<ImageLink> imageLinks, List<String> options, User approver,
-			int rightAnswerIndex, String explainnation) {
+			String description, List<String> options, User approver,
+			int rightAnswerIndex, String explanation, boolean isApproved) {
 		super();
 		this.id = id;
 		this.adminId = adminId;
@@ -64,12 +67,11 @@ public class Question {
 		this.level = level;
 		this.createdDate = createdDate;
 		this.description = description;
-		this.hasImage = hasImage;
-		this.imageLinks = imageLinks;
 		this.options = options;
 		this.approver = approver;
 		this.rightAnswerIndex = rightAnswerIndex;
-		this.explainnation = explainnation;
+		this.explanation = explanation;
+		this.isApproved = isApproved;
 	}
 
 	public long getId() {
@@ -136,22 +138,6 @@ public class Question {
 		this.description = description;
 	}
 
-	public boolean isHasImage() {
-		return hasImage;
-	}
-
-	public void setHasImage(boolean hasImage) {
-		this.hasImage = hasImage;
-	}
-
-	public List<ImageLink> getImageLinks() {
-		return imageLinks;
-	}
-
-	public void setImageLinks(List<ImageLink> imageLinks) {
-		this.imageLinks = imageLinks;
-	}
-
 	public List<String> getOptions() {
 		return options;
 	}
@@ -176,12 +162,20 @@ public class Question {
 		this.rightAnswerIndex = rightAnswerIndex;
 	}
 
-	public String getExplainnation() {
-		return explainnation;
+	public String getExplanation() {
+		return explanation;
 	}
 
-	public void setExplainnation(String explainnation) {
-		this.explainnation = explainnation;
+	public void setExplanation(String explanation) {
+		this.explanation = explanation;
+	}
+
+	public boolean isApproved() {
+		return isApproved;
+	}
+
+	public void setApproved(boolean isApproved) {
+		this.isApproved = isApproved;
 	}
 
 }
